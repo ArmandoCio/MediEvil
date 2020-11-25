@@ -19,14 +19,17 @@ public class PlayerControllerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        // On spacebar press fire dmg
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (gameManager.isGameActive)
         {
-            Instantiate(Magic, transform.position, Magic.transform.rotation);
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            // On spacebar press fire dmg
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Instantiate(Magic, transform.position, Magic.transform.rotation);
+            }
         }
+
     }
     private void OnCollisionEnter(Collision other)
 
@@ -36,7 +39,6 @@ public class PlayerControllerX : MonoBehaviour
 
             
             Destroy(other.gameObject);
-            gameManager.UpdateScore(20); 
             
             
         }

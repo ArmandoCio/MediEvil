@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class DestroyOutOfBoundsEnemy : MonoBehaviour
 {
-    private float leftLimit = -10f;
+    private float leftLimit = -9f;
+    private GameManager gameManager;
+
+
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        // Destroy ball if x position less than left limit
+        // Destroy enemy if past z position
         if (transform.position.z < leftLimit)
         {
+            gameManager.GameOver();
             Destroy(gameObject);
+            
+
+
+
         }
 
     }
